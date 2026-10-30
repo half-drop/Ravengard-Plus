@@ -1,0 +1,23 @@
+{
+	"required": true,
+	"package": "com.seniors.ravengardplus.client.mixin",
+	"compatibilityLevel": "JAVA_25",
+	"client": [
+		"EntityFullBrightMixin",
+		"UpgradeIndicatorMixin",
+		"GuiGraphicsExtractorMixin",
+		"HudCrownBorderMixin",
+		"AbstractContainerScreenCrownBorderMixin",
+		"InventoryScreenMixin",
+		"HudMixin",
+		"DebugScreenEntryListMixin",
+		"DebugRendererMixin",
+		"EntityHitboxDebugRendererMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	},
+	"overwrites": {
+		"requireAnnotations": true
+	}
+}
