@@ -31,6 +31,9 @@ jobs:
           - project: neoforge
             java: '25'
             artifact: ravengard-plus-neoforge-mc26.2
+          - project: neoforge-26.3
+            java: '25'
+            artifact: ravengard-plus-neoforge-mc26.3
     runs-on: ubuntu-24.04
     steps:
       - name: checkout repository
@@ -77,6 +80,30 @@ jobs:
           path: |
             modern-26.1/build/libs/ravengard-plus-*.jar
             !modern-26.1/build/libs/*-sources.jar
+
+  modern-26-3:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: checkout repository
+        uses: actions/checkout@v6
+      - name: validate gradle wrapper
+        uses: gradle/actions/wrapper-validation@v6
+      - name: setup jdk
+        uses: actions/setup-java@v5
+        with:
+          java-version: '25'
+          distribution: 'microsoft'
+      - name: make gradle wrapper executable
+        run: chmod +x ./modern-26.3/gradlew
+      - name: build
+        run: ./modern-26.3/gradlew -p modern-26.3 build
+      - name: capture build artifacts
+        uses: actions/upload-artifact@v7
+        with:
+          name: ravengard-plus-mc26.3
+          path: |
+            modern-26.3/build/libs/ravengard-plus-*.jar
+            !modern-26.3/build/libs/*-sources.jar
 
   modern:
     runs-on: ubuntu-24.04
@@ -176,7 +203,7 @@ jobs:
 
   release:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-    needs: [neoforge, modern-26-1, modern, legacy, legacy-1-21-9, legacy-1-21-11]
+    needs: [neoforge, modern-26-1, modern-26-3, modern, legacy, legacy-1-21-9, legacy-1-21-11]
     runs-on: ubuntu-24.04
     permissions:
       contents: write
@@ -194,14 +221,16 @@ jobs:
         run: |
           version="$(sed -n 's/^mod_version=//p' gradle.properties)"
           modern_26_1_version="$(sed -n 's/^mod_version=//p' modern-26.1/gradle.properties)"
+          modern_26_3_version="$(sed -n 's/^mod_version=//p' modern-26.3/gradle.properties)"
           legacy_version="$(sed -n 's/^mod_version=//p' legacy/gradle.properties)"
           legacy_1_21_9_version="$(sed -n 's/^mod_version=//p' legacy-1.21.9/gradle.properties)"
           legacy_1_21_11_version="$(sed -n 's/^mod_version=//p' legacy-1.21.11/gradle.properties)"
           test -n "$version"
-          for project in neoforge neoforge-26.1 neoforge-1.21.5 neoforge-1.21.6 neoforge-1.21.9 neoforge-1.21.11; do
+          for project in neoforge neoforge-26.1 neoforge-26.3 neoforge-1.21.5 neoforge-1.21.6 neoforge-1.21.9 neoforge-1.21.11; do
             test "$version" = "$(sed -n 's/^mod_version=//p' "$project/gradle.properties")"
           done
           test "$version" = "$modern_26_1_version"
+          test "$version" = "$modern_26_3_version"
           test "$version" = "$legacy_version"
           test "$version" = "$legacy_1_21_9_version"
           test "$version" = "$legacy_1_21_11_version"

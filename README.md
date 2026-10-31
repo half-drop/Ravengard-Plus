@@ -5,7 +5,7 @@
 <h1 align="center">Ravengard Plus</h1>
 
 <p align="center">
-  Client-side item utilities for Hypixel Ravengard on Minecraft 1.21.5-1.21.11 and 26.1-26.2, with Fabric and NeoForge builds.
+  Client-side item utilities for Hypixel Ravengard on Minecraft 1.21.5-1.21.11 and 26.1-26.3, with Fabric and NeoForge builds.
 </p>
 
 <p align="center">
@@ -80,8 +80,9 @@ Locale files live in the root `translations` directory and are included in every
 | 1.21.11 | `+mc1.21.11` | 21 or newer | 3.8.2 or newer for Minecraft 1.21.11 |
 | 26.1-26.1.2 | `+mc26.1-26.1.2` | 25 or newer | 3.9.5 or newer for Minecraft 26.1 |
 | 26.2 | `+mc26.2` | 25 or newer | 3.9.5 or newer for Minecraft 26.2 |
+| 26.3 | `+mc26.3` | 25 or newer | 3.9.7 or newer for Minecraft 26.3 |
 
-All versions require Fabric Loader 0.19.3 or newer.
+Versions through 26.2 require Fabric Loader 0.19.3 or newer. Minecraft 26.3 requires Fabric Loader 0.19.5 or newer.
 
 ### NeoForge
 
@@ -97,12 +98,13 @@ All versions require Fabric Loader 0.19.3 or newer.
 | 1.21.11 | `+mc1.21.11-neoforge` | 21 or newer | 3.8.1 or newer for Minecraft 1.21.11 |
 | 26.1-26.1.2 | `+mc26.1-26.1.2-neoforge` | 25 or newer | 3.9.6 or newer for Minecraft 26.1 |
 | 26.2 | `+mc26.2-neoforge` | 25 or newer | 3.9.5 or newer for Minecraft 26.2 |
+| 26.3 | `+mc26.3-neoforge` | 25 or newer | 3.9.7 or newer for Minecraft 26.3 |
 
 The NeoForge Mods screen and the `O` key both open the YACL configuration screen.
 
 ## Building from source
 
-Build the Minecraft 26.2 jar with Java 25:
+Build the Minecraft 26.3 Fabric jar with Java 25:\n\n```shell\n./gradlew -p modern-26.3 build\n```\n\nBuild the Minecraft 26.2 jar with Java 25:
 
 ```shell
 ./gradlew build
@@ -117,6 +119,7 @@ Build the NeoForge jars from the repository root. Use Java 21 for the 1.21.x pro
 ./neoforge-1.21.11/gradlew -p neoforge-1.21.11 build
 ./neoforge-26.1/gradlew -p neoforge-26.1 build
 ./neoforge/gradlew -p neoforge build
+./neoforge-26.3/gradlew -p neoforge-26.3 build
 ```
 
 Build the Minecraft 26.1-26.1.2 jar with Java 25:
